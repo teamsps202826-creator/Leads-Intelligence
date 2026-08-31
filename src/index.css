@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-100 text-ink-900 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  [data-theme="dark"] body {
+    @apply bg-ink-950 text-ink-100;
+  }
+
+  /* Numbers in tables and metrics must line up column to column. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    @apply bg-accent-200 text-accent-900;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent-500 ring-offset-1 ring-offset-white;
+  }
+  [data-theme="dark"] *:focus-visible {
+    @apply ring-offset-ink-950;
+  }
+}
+
+@layer components {
+  /* Surfaces. Two levels only: the page, and things sitting on it. */
+  .surface {
+    @apply bg-white border border-ink-200 rounded-xl shadow-card;
+  }
+  [data-theme="dark"] .surface {
+    @apply bg-ink-900 border-ink-800 shadow-none;
+  }
+
+  .surface-muted {
+    @apply bg-ink-50 border border-ink-200 rounded-xl;
+  }
+  [data-theme="dark"] .surface-muted {
+    @apply bg-ink-900/60 border-ink-800;
+  }
+
+  .divider {
+    @apply border-ink-200;
+  }
+  [data-theme="dark"] .divider {
+    @apply border-ink-800;
+  }
+
+  .muted {
+    @apply text-ink-500;
+  }
+  [data-theme="dark"] .muted {
+    @apply text-ink-400;
+  }
+
+  /* Section eyebrow: small, uppercase, tracked. Used above every block so the
+     page has a readable hierarchy without heavy headings. */
+  .eyebrow {
+    @apply text-2xs font-semibold uppercase tracking-[0.08em] text-ink-500;
+  }
+  [data-theme="dark"] .eyebrow {
+    @apply text-ink-400;
+  }
+
+  .field-input {
+    @apply w-full rounded-lg border border-ink-300 bg-white px-3 py-2 text-sm
+           text-ink-900 placeholder:text-ink-400
+           focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20;
+  }
+  [data-theme="dark"] .field-input {
+    @apply border-ink-700 bg-ink-950 text-ink-100 placeholder:text-ink-500;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded bg-ink-200;
+  }
+  [data-theme="dark"] .skeleton {
+    @apply bg-ink-800;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+  }
+
+  /* An unevidenced score component. Hatching reads as "not evaluated"; a flat
+     filled bar would read as "measured, and found to be zero". Those are
+     different claims, and the whole scoring model depends on the difference. */
+  .hatched {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgb(211 206 200 / 0.9) 0 4px,
+      transparent 4px 8px
+    );
+  }
+  [data-theme="dark"] .hatched {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgb(68 63 58 / 0.9) 0 4px,
+      transparent 4px 8px
+    );
+  }
+}

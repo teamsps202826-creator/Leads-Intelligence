@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Intelligence</title>
+    <meta
+      name="description"
+      content="Find researchers who need your product, and understand why."
+    />
+    <script>
+      // Applied before first paint so a dark-mode user never sees a white flash.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.dataset.theme = saved;
+        else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+          document.documentElement.dataset.theme = "dark";
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
